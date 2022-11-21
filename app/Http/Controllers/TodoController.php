@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class TodoController extends Controller
 {
@@ -14,9 +16,15 @@ class TodoController extends Controller
      */
     public function index()
     {
-        //menampilkan halaman awal,semua data
+        $todos = Todo::all();
+        return view('dashboard.index', compact('todos'));
     }
 
+    public function complated()
+    {
+        return view('dashboard.complated');
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +32,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //menampilkan halaman input+data
+        return view('dashboard.create');
     }
 
     /**
@@ -36,6 +44,20 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         //mengirim data ke database
+        $request->validate([
+            'titel' => 'required|min:3',
+            'date' => 'required',
+            'description' => 'required|min:8',
+        ]);
+        Todo::create([
+            'titel' => $request->titel,
+            'description' => $request->description,
+            'date' => $request->date,
+            'status' => 0,
+            'user_id' => Auth::user()->id,
+        ]);
+        return redirect()->route('todo.index')->with('successAdd',
+        'Berhasil menambahkan data ToDo!');
     }
 
     /**

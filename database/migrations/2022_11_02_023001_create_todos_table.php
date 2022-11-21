@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('description');
             $table->date('date');
             $table->boolean('status');
-            $table->date('done_time');
+            $table->date('done_time')->nullable();
             $table->timestamps();
         });
     }

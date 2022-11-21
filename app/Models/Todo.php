@@ -12,7 +12,7 @@ class Todo extends Model
         'user_id',
         'description',
         'date',
-        'title',
+        'titel',
         'status',
         'done_time',
     ];
