@@ -77,9 +77,11 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Todo $todo)
+    public function edit($id)
     {
         //menampilkan form edit data
+        $todo = Todo::where('id', $id)->first();
+        return view('dashboard.edit', compact('todo'));
     }
 
     /**
@@ -89,9 +91,22 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Todo $todo)
+    public function update(Request $request,$id)
     {
         //menampilkan data di data base
+        $request->validate([
+            'titel' => 'required|min:3',
+            'date' => 'required',
+            'description' => 'required|min:8',
+        ]);
+        Todo::where('id', $id)->update([
+            'titel' => $request->titel,
+            'description' => $request->description,
+            'date' => $request->date,
+            'status' => 0,
+            'user_id' => Auth::user()->id,
+        ]);
+        return redirect('/todo/')->with('successUpdate', 'Berhasil Diperbarui');
     }
 
     /**

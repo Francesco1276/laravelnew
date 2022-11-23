@@ -12,6 +12,12 @@
              {{Session::get('successAdd')}}</div>
         @endif
 
+ @if (Session::get('successUpdate'))
+        <div class="alert alert-success">
+             {{Session::get('successUpdate')}}
+            </div>
+        @endif
+
     <div class="d-flex align-items-start justify-content-between">
         <div class="d-flex flex-column">
             <div class="h5">My Todo's</div>
@@ -51,10 +57,10 @@
                 </label>
             </div>
             <div class="d-flex flex-column w-75">
-                <b class="text-justify">
-                    {{$todo['title'] }}
-                </b>
-                <p class="text-muted">{{ $todo['status'] ? 'Complated' : 'On-Progress' }}</span></p>
+                <a href="/todo/edit/{{ $todo['id'] }}" class="text-justify text-dark">
+                    {{$todo['titel'] }}
+                </a>
+                <p class="text-muted">{{ $todo['status'] ? 'Complated' : 'On-Progress' }} <span class="date"> {{\Carbon\Carbon::parse($todo['date'])->format('j F, Y')}}</span></p>
             </div>
             <div class="ml-auto">
                 <span class="fas fa-arrow-right btn"></span>
