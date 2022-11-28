@@ -1,0 +1,11 @@
+*{
+    color: blue;
+
+}
+
+._img > img {
+  width: 260px;
+}
+._icon > img{
+  width:400px;
+}

@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
 
 body{
-    background-color: #eee;
+    
     font-family: "Poppins", sans-serif;
     font-weight: 300;
 }
@@ -10,7 +10,11 @@ body{
     width:350px;
     padding:10px;
     border:none;
-    border-radius:20px;
+    border-radius:20px;;
+}
+
+.wrapper{
+    border: solid #000 1px;
 }
 
 .logo i {
@@ -23,6 +27,8 @@ body{
     padding-right:35px;
     border:2px solid #eee;
     transition:all 0.5s;
+    
+   
 }
 
 .form-input input:focus{
@@ -270,11 +276,11 @@ fieldset {
 }
  
 #create-form button[type="submit"] {
-    background: #2caf74ea;
+    background: #4ee70cea;
 }
 
 .btn-cancel {
-    background: #2a353d;
+    background: #e30909;
 }
 
 .btn-cancel:hover {

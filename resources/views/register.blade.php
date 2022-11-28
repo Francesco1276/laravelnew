@@ -9,9 +9,10 @@
         </ul>
     </div>
 @endif
-    <div class="row justify-content-center" style="margin-top: 150px">
+    <div class="row justify-content-center" style="margin-top: 100px">
         <div class="col-lg-6">
-            <main class="form-registration">
+        <div class="d-flex">
+            <main class="form-registration col-6"data-aos="zoom-in-up" data-aos-duration="5000">
                 <h1 class="h3 mb-3 fw-normal text-center">Registration Form</h1>
                 <form action="{{route('register.post')}}" method="POST">
                     @csrf
@@ -42,6 +43,10 @@
                 <small class="d-block mt-3">Have an account? <a class="text-primary" href="/login"> Login
                         Here</a></small>
             </main>
+            <div class="col-6 _icon">
+                    <img src="login.jpg" alt="">
+                </div>
+            </div>  
         </div>
     </div>
  

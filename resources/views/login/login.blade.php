@@ -27,28 +27,34 @@
             @endforeach
         </ul>
     </div>
-@endif
-            <main class="form-registration">
-                <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
-                <form action="{{route('login.auth')}}" method="POST">
-                @csrf
-                    <div class="form-floating">
-                        <input type="text" class="form-control rounded-top" name="username" id="Username"
-                            value="{{ old('username') }}" placeholder="username">
-                        <label for="name">Username</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control rounded-bottom" name="password" id="password"
-                            placeholder="Password">
-                        <label for="password">Password</label>
-                    </div>
- 
-                    <button class="w-100 btn btn-primary mt-3" type="submit">Login</button>
-                </form>
-                <small class="d-block mt-3">Doesn't have an account? <a class="text-primary" href="/register">
-                        Register
-                        Now!</a></small>
-            </main>
+@endif      <div class="d-flex">
+                <main class="form-registration col-6" data-aos="zoom-in-up" data-aos-duration="5000">
+                    <h1 class="h3 mb-3 fw-normal text-center">Login</h1>
+                    <form action="{{route('login.auth')}}" method="POST">
+                    @csrf
+                        <div class="form-floating mb-2">
+                            <input type="text" class="form-control rounded-top" name="username" id="Username"
+                                value="{{ old('username') }}" placeholder="username">
+                            <label for="name">Username</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" class="form-control rounded-bottom" name="password" id="password"
+                                placeholder="Password">
+                            <label for="password">Password</label>
+                        </div>
+    
+                        <button class="w-100 btn btn-primary mt-3" type="submit">Login</button>
+                    </form>
+                    <small class="d-block mt-3">Doesn't have an account? <a class="text-primary" href="/register">
+                            Register
+                            Now!</a></small>
+                </main>
+                <div class="col-6 _img">
+                    <img src="login.jpg" alt="">
+                </div>
+            </div>
+            </div>
+        </div>
         </div>
     </div>
  @endsection

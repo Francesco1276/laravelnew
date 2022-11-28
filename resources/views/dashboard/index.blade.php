@@ -26,7 +26,8 @@
             </p>
             <br>
             <span>
-                <a href="{{route('todo.create')}}" class="text-success">Create</a> | <a href="{{route('todo.complated')}}">Complated</a>
+                <a href="{{route('todo.create')}}" class="text-success">Create</a> 
+                 <p href="{{route('todo.complated')}}">Complated</p>
             </span>
         </div>
         <div class="info btn ml-md-4 ml-0">
@@ -43,9 +44,6 @@
                 data-target="#comments" aria-expanded="false" aria-controls="comments"></button>
         </div>
 
-            <div class="ml-auto">
-                <span class="fas fa-arrow-right btn"></span>
-            </div>
         </div>
         <div id="comments" class="mt-1">
         @foreach ($todos as $todo)
@@ -63,6 +61,7 @@
                 <p class="text-muted">{{ $todo['status'] ? 'Complated' : 'On-Progress' }} <span class="date"> {{\Carbon\Carbon::parse($todo['date'])->format('j F, Y')}}</span></p>
             </div>
             <div class="ml-auto">
+            <i class="fa-solid fa-trash"></i>
                 <span class="fas fa-arrow-right btn"></span>
             </div>
         </div>
