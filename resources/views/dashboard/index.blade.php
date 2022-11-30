@@ -17,6 +17,11 @@
              {{Session::get('successUpdate')}}
             </div>
         @endif
+ @if (Session::get('successDelete'))
+        <div class="alert alert-success">
+             {{Session::get('successDelete')}}
+            </div>
+        @endif
 
     <div class="d-flex align-items-start justify-content-between">
         <div class="d-flex flex-column">
@@ -26,8 +31,7 @@
             </p>
             <br>
             <span>
-                <a href="{{route('todo.create')}}" class="text-success">Create</a> 
-                 <p href="{{route('todo.complated')}}">Complated</p>
+                <a href="{{route('todo.create')}}" class="text-success">Create</a> | <a href="{{route('todo.complated')}}">Complated</a>
             </span>
         </div>
         <div class="info btn ml-md-4 ml-0">
@@ -39,7 +43,7 @@
             <div>
                 <span class="text-muted fas fa-comment btn"></span>
             </div>
-            <div class="text-muted">2 todos</div>
+            <div class="text-muted">{{!is_null($todos) ? count($todos) : '-' }} todos</div>
             <button class="ml-auto btn bg-white text-muted fas fa-angle-down" type="button" data-toggle="collapse"
                 data-target="#comments" aria-expanded="false" aria-controls="comments"></button>
         </div>
@@ -49,10 +53,15 @@
         @foreach ($todos as $todo)
         <div class="comment d-flex align-items-start justify-content-between">
             <div class="mr-2">
-                <label class="option">
+                <form action="/todo/complated/{{$todo['id']}}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <button type="sumbit" class="fas fa-check" style="background: #B9E0FF; padding: 8px !important;"></button>
+                <!-- <label class="option">
                     <input type="checkbox">
                     <span class="checkmark"></span>
-                </label>
+                </label> -->
+</form>
             </div>
             <div class="d-flex flex-column w-75">
                 <a href="/todo/edit/{{ $todo['id'] }}" class="text-justify text-dark">
@@ -61,8 +70,14 @@
                 <p class="text-muted">{{ $todo['status'] ? 'Complated' : 'On-Progress' }} <span class="date"> {{\Carbon\Carbon::parse($todo['date'])->format('j F, Y')}}</span></p>
             </div>
             <div class="ml-auto">
-            <i class="fa-solid fa-trash"></i>
-                <span class="fas fa-arrow-right btn"></span>
+            <form action="{{ route('todo.delete', $todo['id'])}}" method="POST">
+                @csrf
+
+                @method('DELETE')
+
+                <button class="fas fa-trash text-denger btn"></button>
+</form>
+                <!-- <span class="fas fa-arrow-right btn"></span> -->
             </div>
         </div>
         @endforeach

@@ -26,6 +26,8 @@ Route::middleware('isLogin')->prefix('/todo')->name('todo.')->group(function(){
     Route::post('/store', [TodoController::class, 'store'])->name('store');
     Route::get('/edit/{id}',[TodoController::class, 'edit'])->name('edit');
     Route::patch('/update/{id}', [TodoController::class, 'update'])->name('update');
+    Route::delete('/delete/{id}', [TodoController::class, 'destroy'])->name('delete');
+    Route::patch('/complated/{id}', [TodoController::class, 'updateComplated'])->name('update-complated');
 });
 
 /*

@@ -29,8 +29,10 @@
 <nav class="navbar navbar-primary bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
+      <h5>
       <img src="{{asset('icon/icons8-t-67.png')}}" alt="" width="30" height="30"class="d-inline-block align-text-center">
       TODO APP
+</h5>
     </a>
   </div>
 </nav>

@@ -14,7 +14,7 @@ body{
 }
 
 .wrapper{
-    border: solid #000 1px;
+    border: solid rgb(179, 248, 230) 10px;
 }
 
 .logo i {
@@ -276,11 +276,11 @@ fieldset {
 }
  
 #create-form button[type="submit"] {
-    background: #4ee70cea;
+    background:rgb(26, 26, 201);
 }
 
 .btn-cancel {
-    background: #e30909;
+    background: #191616;
 }
 
 .btn-cancel:hover {

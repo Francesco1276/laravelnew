@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 use App\Models\User;
 
 class TodoController extends Controller
@@ -16,13 +17,29 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::all();
+        $todos = Todo::where([
+            ['user_id', '=',Auth::user()->id],
+            ['status', '=', 0,]
+        ])->get();
         return view('dashboard.index', compact('todos'));
     }
 
     public function complated()
     {
-        return view('dashboard.complated');
+        $todos = Todo::where([
+            ['user_id', '=',Auth::user()->id],
+            ['status', '=', 1,]
+        ])->get();
+        return view('dashboard.complated', compact('todos'));
+    }
+
+    public function updateComplated($id)
+    {
+        Todo::where('id', $id)->update([
+            'status' => 1,
+            'done_time' => Carbon::now(),
+        ]);
+        return redirect()->route('todo.complated')->with('done','Todo sudah selesai dikerjakan!!');
     }
     
     /**
@@ -115,8 +132,10 @@ class TodoController extends Controller
      * @param  \App\Models\Todo  $todo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Todo $todo)
+    public function destroy( $id)
     {
+        Todo::where('id', '=', $id)->delete();
+        return redirect()->route('todo.index')->with('successDelete', 'Berhasil menghapus data todo');
         //menghapus data dari database
     }
 }

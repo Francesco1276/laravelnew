@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="wrapper bg-white">
+@if (Session::get('done'))
+        <div class="alert alert-success">
+             {{Session::get('done')}}
+            </div>
+        @endif
     <div class="d-flex align-items-start justify-content-between">
         <div class="d-flex flex-column">
             <div class="h5">My Complated Todo's</div>
@@ -20,63 +25,43 @@
             <div>
                 <span class="text-muted fas fa-comment btn"></span>
             </div>
-            <div class="text-muted">2 complated todos</div>
+            <div class="text-muted">{{!is_null($todos) ? count($todos) : '-' }} complated todos</div>
             <button class="ml-auto btn bg-white text-muted fas fa-angle-down" type="button" data-toggle="collapse"
                 data-target="#comments" aria-expanded="false" aria-controls="comments"></button>
         </div>
     </div>
     <div id="comments" class="mt-1">
+        @foreach ($todos as $todo)
         <div class="comment d-flex align-items-start justify-content-between">
             <div class="mr-2">
-                <label class="option">
-                    <input type="checkbox" checked disabled>
+                <!-- <form action="/todo/complated/{{$todo['id']}}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <button type="sumbit" class="fas fa-check" style="background: #B9E0FF; padding: 8px !important;"></button>
+                 <label class="option">
+                    <input type="checkbox">
                     <span class="checkmark"></span>
-                </label>
-            </div>
-            <div class="d-flex flex-column">
-                <b class="text-justify">
-                    This is the first task that has a really long name to test this.
-                </b>
-                <p class="text-muted">Completed <span class="date">Dec 16, 2019</span></p>
-            </div>
-            <div class="ml-md-4 ml-0">
-                <span class="fas fa-undo btn"></span>
-            </div>
-        </div>
-        <div class="comment d-flex align-items-start justify-content-between">
-            <div class="mr-2">
-                <label class="option">
-                    <input type="checkbox" checked disabled>
-                    <span class="checkmark"></span>
-                </label>
+                </label> -->
+<!-- </form> -->
             </div>
             <div class="d-flex flex-column w-75">
-                <b class="text-justify">
-                    Add to Copper
-                </b>
-                <p class="text-muted">Completed <span class="date">Dec 16, 2019</span></p>
+                <a href="/todo/edit/{{ $todo['id'] }}" class="text-justify text-dark">
+                    {{$todo['titel'] }}
+                </a>
+                <p class="text-muted">{{ $todo['status'] ? 'Complated' : 'On-Progress' }} <span class="date"> {{\Carbon\Carbon::parse($todo['date'])->format('j F, Y')}}</span></p>
             </div>
             <div class="ml-auto">
-                <span class="fas fa-undo btn"></span>
+            <form action="{{ route('todo.delete', $todo['id'])}}" method="POST">
+                @csrf
+
+                @method('DELETE')
+
+                <button class="fas fa-trash text-denger btn"></button>
+</form>
+                <!-- <span class="fas fa-arrow-right btn"></span> -->
             </div>
         </div>
-        <div class="comment d-flex align-items-start justify-content-between">
-            <div class="mr-2">
-                <label class="option">
-                    <input type="checkbox" checked disabled>
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-            <div class="d-flex flex-column w-75">
-                <b class="text-justify">
-                    Check on-boarding status
-                </b>
-                <p class="text-muted">Completed <span class="date">Dec 16, 2019</span></p>
-            </div>
-            <div class="ml-auto">
-                <span class="fas fa-undo btn"></span>
-            </div>
-        </div>
+        @endforeach
     </div>
 </div>
 @endsection
